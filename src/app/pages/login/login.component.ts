@@ -25,14 +25,6 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-      this.loginService.getTest().subscribe(
-        (data) => {
-          console.log('data : ', data);
-        },
-        (error) => {
-          console.log('error : ', error);
-        }
-      );
     }
 
     // Login form Submit method
@@ -41,12 +33,11 @@ export class LoginComponent implements OnInit {
         (response) => {
           console.log('Login successful', response);
           this.snackBar.open('Login successful', 'Close', { duration: 3000 });
-          // Navigate to dashboard or home page after successful login
-          // this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard']);
         },
         (error) => {
           console.error('Login failed', error);
-          this.snackBar.open('Login failed. Please check your credentials.', 'Close', { duration: 3000 });
+          this.snackBar.open(error.error.MESSAGE, 'Close', { duration: 3000 });
         }
       );
     }

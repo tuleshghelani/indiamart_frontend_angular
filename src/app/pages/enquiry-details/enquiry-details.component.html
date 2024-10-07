@@ -1,0 +1,111 @@
+<div class="enquiry-details-container">
+
+  <button mat-raised-button color="accent" (click)="onAction()">Back</button>&nbsp;&nbsp;
+  <button mat-raised-button color="primary" (click)="openCreateFollowUpDialog()" class="create-follow-up-btn">
+    <mat-icon>add</mat-icon>
+    Create Follow-up
+  </button>
+  <mat-card *ngIf="!loading && !error">
+    <mat-card-header>
+      <mat-card-title>Enquiry Details</mat-card-title>
+      <mat-card-subtitle>ID: {{enquiryDetails.id}} | Status: {{getLeadType(enquiryDetails.query_type)}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="details-grid">
+        <div class="detail-item">
+          <h3>Sender Information</h3>
+          <p><strong>Name:</strong> {{enquiryDetails.sender_name}}</p>
+          <p><strong>Company:</strong> {{enquiryDetails.sender_company}}</p>
+          <p><strong>Email:</strong> {{enquiryDetails.sender_email}}</p>
+          <p><strong>Mobile:</strong> {{enquiryDetails.sender_mobile}}</p>
+          <p><strong>Alt. Mobile:</strong> {{enquiryDetails.sender_mobile_alt}}</p>
+          <p><strong>Phone:</strong> {{enquiryDetails.sender_phone}}</p>
+          <p><strong>Alt. Phone:</strong> {{enquiryDetails.sender_phone_alt}}</p>
+          <p><strong>Alt. Email:</strong> {{enquiryDetails.sender_email_alt}}</p>
+        </div>
+        <div class="detail-item">
+          <h3>Address</h3>
+          <p>{{enquiryDetails.sender_address}}</p>
+          <p>{{enquiryDetails.sender_city}}, {{enquiryDetails.sender_state}}</p>
+          <p>{{enquiryDetails.sender_pincode}}</p>
+          <p>{{enquiryDetails.sender_country_iso}}</p>
+        </div>
+        <div class="detail-item">
+          <h3>Query Information</h3>
+          <p><strong>Type:</strong> {{enquiryDetails.query_type}}</p>
+          <p><strong>Time:</strong> {{enquiryDetails.query_time | date:'medium'}}</p>
+          <p><strong>Product:</strong> {{enquiryDetails.query_product_name}}</p>
+          <p><strong>Category:</strong> {{enquiryDetails.query_mcat_name}}</p>
+          <p><strong>Subject:</strong> {{enquiryDetails.subject}}</p>
+        </div>
+        <div class="detail-item full-width">
+          <h3>Query Message</h3>
+          <p>{{enquiryDetails.query_message}}</p>
+        </div>
+      </div>
+    </mat-card-content>
+    <br>
+  </mat-card>
+
+  <mat-spinner *ngIf="loading"></mat-spinner>
+
+  <mat-card *ngIf="error">
+    <mat-card-content>
+      <p>An error occurred while fetching the enquiry details. Please try again later.</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="!loading && !error && enquiryDetails.latest_follow_up" class="latest-follow-up-card">
+    <mat-card-header>
+      <mat-card-title>Latest Follow-up</mat-card-title>
+      <mat-card-subtitle>{{enquiryDetails.latest_follow_up.created_at | date:'medium'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="follow-up-status">
+        <mat-icon [ngClass]="getStatusClass(enquiryDetails.latest_follow_up.follow_up_status)">
+          {{getStatusIcon(enquiryDetails.latest_follow_up.follow_up_status)}}
+        </mat-icon>
+        <span>{{getStatusText(enquiryDetails.latest_follow_up.follow_up_status)}}</span>
+      </div>
+      <p class="follow-up-description">{{enquiryDetails.latest_follow_up.description}}</p>
+      <p class="next-action-date">
+        <mat-icon>event</mat-icon>
+        Next Action: {{enquiryDetails.latest_follow_up.next_action_date | date:'medium'}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-expansion-panel class="follow-ups-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        All Follow-ups
+      </mat-panel-title>
+      <mat-panel-description>
+        Click to view {{enquiryDetails.follow_ups.length}} follow-ups
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <mat-list-item *ngFor="let followUp of enquiryDetails.follow_ups">
+        <div mat-line class="follow-up-header">
+          <span class="follow-up-status" [ngClass]="getStatusClass(followUp.follow_up_status)">
+            {{getStatusText(followUp.follow_up_status)}}
+          </span>
+        </div>
+        <div mat-line class="follow-up-dates">
+          <span class="follow-up-created">
+            <mat-icon>event_note</mat-icon> Created: {{followUp.created_at | date:'medium'}}
+          </span>
+           {{followUp.description}}
+          <span class="follow-up-next-action">
+            <mat-icon>update</mat-icon> Next Action: {{followUp.next_action_date | date:'medium'}}
+          </span>
+        </div>
+        <div mat-line class="follow-up-description">
+          <mat-icon>description</mat-icon> {{followUp.description}}
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</div>

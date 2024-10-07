@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 // Variables
 $background-color: #d7e3ff;
 $primary-color: #3f51b5;  // A deep blue, commonly used in Material Design
@@ -120,4 +119,11 @@ body {
 .accent-bg {
   background-color: $accent-color;
   color: rgba(0, 0, 0, 0.87);
+}
+
+// Export the variables so they can be imported in component styles
+:export {
+  primaryColor: $primary-color;
+  secondaryColor: $secondary-color;
+  accentColor: $accent-color;
 }

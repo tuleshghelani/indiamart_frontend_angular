@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,21 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  public login(username: string, password: string): Observable<any> {
-    // this.getTest();
-    // console.log('data1111 : ', this.baseUrl);
-    return this.http.post(`${this.baseUrl}/api/user/login/`, { username, password });
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/user/login/`, { username, password }).pipe(
+      tap((response: any) => {
+        if (response.ACCESS_TOKEN) {
+          localStorage.setItem('ACCESS_TOKEN', response.ACCESS_TOKEN);
+        }
+      })
+    );
   }
 
-  public getTest() {
-    this.http.get(`${this.baseUrl}/api/hello/`).subscribe((data) => {
-      console.log('data : ', data);
-    });
-    console.log('data222 : ', this.baseUrl);
-    return this.http.get(`${this.baseUrl}`);
+  getToken(): string | null {
+    return localStorage.getItem('ACCESS_TOKEN');
+  }
+
+  logout(): void {
+    localStorage.removeItem('ACCESS_TOKEN');
   }
 }

@@ -9,8 +9,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {  MatIconModule } from '@angular/material/icon';
@@ -21,6 +21,20 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from "ngx-ui-loader";
 import { FooterComponent } from './components/footer/footer.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EnquiryDetailsComponent } from './pages/enquiry-details/enquiry-details.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CreateFollowUpDialogComponent } from './pages/create-follow-up-dialog/create-follow-up-dialog.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +42,10 @@ import { SignupComponent } from './pages/signup/signup.component';
     LoginComponent,
     NavbarComponent,
     FooterComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent,
+    EnquiryDetailsComponent,
+    CreateFollowUpDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,9 +66,21 @@ import { SignupComponent } from './pages/signup/signup.component';
     MatSelectModule,
     NgxUiLoaderModule,
     NgxUiLoaderHttpModule,
-
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatNativeDateModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
