@@ -1,1 +1,123 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Variables
+$background-color: #d7e3ff;
+$primary-color: #3f51b5;  // A deep blue, commonly used in Material Design
+$secondary-color: #ff4081;  // A vibrant pink, complementary to the primary blue
+$accent-color: #ffd740;  // A warm yellow, for highlights and accents
+
+$font-family-sans-serif: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+$font-family-serif: 'Georgia', 'Times New Roman', serif;
+$font-family-monospace: 'Roboto Mono', 'Courier New', monospace;
+
+$font-family: $font-family-sans-serif;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* You can add global styles to this file, and also import other style files */
+
+
+/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+
+html,
+body {
+    height: 100%;
+    background: #d7e3ff;
+    /* #f5f5f5 */
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+/* Margin 20px */
+
+.ml20 {
+    margin-left: 20px !important
+}
+
+.mr20 {
+    margin-right: 20px !important
+}
+
+.mt20 {
+    margin-top: 20px !important
+}
+
+.mb20 {
+    margin-bottom: 20px !important
+}
+
+
+/* Margin10px */
+
+.ml10 {
+    margin-left: 10px !important
+}
+
+.mr10 {
+    margin-right: 10px !important
+}
+
+.mt10 {
+    margin-top: 10px !important
+}
+
+.mb10 {
+    margin-bottom: 10px !important
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: $font-family;
+    background: $background-color;
+    overflow-x: hidden; // Prevent horizontal scrolling
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100vw; // Ensure body doesn't exceed viewport width
+}
+
+// Add this utility class
+.full-width {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Use these variables in your styles
+body {
+  font-family: $font-family;
+  background-color: $background-color;
+  color: rgba(0, 0, 0, 0.87);  // Standard Material Design text color
+}
+
+// Example usage of colors
+.primary-bg {
+  background-color: $primary-color;
+  color: white;
+}
+
+.secondary-bg {
+  background-color: $secondary-color;
+  color: white;
+}
+
+.accent-bg {
+  background-color: $accent-color;
+  color: rgba(0, 0, 0, 0.87);
+}

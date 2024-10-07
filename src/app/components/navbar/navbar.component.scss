@@ -1,0 +1,29 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  margin-left: auto; // This pushes the button to the right
+}
+
+.button-text {
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .button-text {
+    display: none;
+  }
+  
+  .login-button {
+    padding: 0 8px;
+  }
+}

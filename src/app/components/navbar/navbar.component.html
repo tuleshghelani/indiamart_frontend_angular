@@ -1,0 +1,20 @@
+<mat-sidenav-container mat-app-background [ngClass]="isDarkTheme? 'dark-theme' : 'light-theme' ">
+  <mat-toolbar color="primary">
+      <span>JK Industries</span>
+      <span class="spacer"></span>
+      <button mat-button routerLink="/login" class="login-button">
+        <mat-icon>login</mat-icon>
+        <span class="button-text">Login</span>
+      </button>
+      <!-- Add other navbar items here -->
+  </mat-toolbar>
+
+
+  <mat-card>
+      <!-- Dynamic Content -->
+      <router-outlet></router-outlet>
+      <!-- footer -->
+      <app-footer></app-footer>
+  </mat-card>
+
+</mat-sidenav-container>
