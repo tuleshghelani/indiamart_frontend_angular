@@ -1,12 +1,19 @@
 <!-- Loader -->
-<ngx-ui-loader fgsColor="#ff4081" pbColor="#ff4081" fgsType="square-jelly-box" text="Please Wait..." textColor="#fff"></ngx-ui-loader>
+<ngx-ui-loader 
+  fgsColor="#ff4081" 
+  pbColor="#ff4081" 
+  fgsType="square-jelly-box" 
+  text="Please Wait..." 
+  textColor="#fff"
+  [hasProgressBar]="true"
+  [overlayColor]="'rgba(40,40,40,0.8)'"
+  blur="10"
+  [fgsPosition]="'center-center'"
+  overlayBlur="5">
+</ngx-ui-loader>
 
-
-<!-- Loader Blur -->
-<div ngxUiLoaderBlurred (blur)="10">
-    <!-- This page content will be blurred/frosted when foreground loader is showed -->
-
-    <!-- Static Content -->
-    <app-navbar></app-navbar>
-    <!-- <app-login></app-login> -->
+<!-- Main Content -->
+<div class="app-container">
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
 </div>

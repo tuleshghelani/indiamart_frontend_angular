@@ -18,7 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from "ngx-ui-loader";
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderConfig, POSITION, SPINNER, PB_DIRECTION } from "ngx-ui-loader";
 import { FooterComponent } from './components/footer/footer.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -34,7 +34,21 @@ import { CreateFollowUpDialogComponent } from './pages/create-follow-up-dialog/c
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
+import { FollowupComponent } from './pages/followup/followup.component';
 
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: '#ff4081',
+  bgsPosition: POSITION.centerCenter,
+  bgsSize: 40,
+  bgsType: SPINNER.ballSpinClockwise,
+  fgsType: SPINNER.squareJellyBox,
+  pbDirection: PB_DIRECTION.leftToRight,
+  pbThickness: 3,
+  blur: 10,
+  overlayColor: 'rgba(40,40,40,0.8)',
+  hasProgressBar: true,
+  fgsPosition: POSITION.centerCenter
+};
 
 @NgModule({
   declarations: [
@@ -45,7 +59,8 @@ import { DatePipe } from '@angular/common';
     SignupComponent,
     DashboardComponent,
     EnquiryDetailsComponent,
-    CreateFollowUpDialogComponent
+    CreateFollowUpDialogComponent,
+    FollowupComponent
   ],
   imports: [
     BrowserModule,
@@ -64,8 +79,8 @@ import { DatePipe } from '@angular/common';
     MatListModule,
     MatSlideToggleModule,
     MatSelectModule,
-    NgxUiLoaderModule,
-    NgxUiLoaderHttpModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

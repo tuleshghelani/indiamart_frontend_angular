@@ -15,6 +15,10 @@ export class EnquiryService {
     return this.http.post(`${this.baseUrl}/api/enquiry/search-enquiries/`, params);
   }
 
+  downloadEnquiries(params: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/enquiry/download-enquiries-excel/`, params, { responseType: 'blob' });
+  }
+
 
   getEnquiryDetails(id: number): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/enquiry/get-enquiry-details/`, { id });

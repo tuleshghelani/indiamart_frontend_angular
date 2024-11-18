@@ -27,3 +27,24 @@
     padding: 0 8px;
   }
 }
+
+mat-toolbar {
+  button {
+    margin: 0 8px;
+
+    mat-icon {
+      margin-right: 4px;
+    }
+  }
+
+  .active {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid white;
+  }
+}
+
+.button-text {
+  @media (max-width: 600px) {
+    display: none;
+  }
+}

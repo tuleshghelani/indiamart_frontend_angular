@@ -14,4 +14,8 @@ export class FollowUpService {
   createFollowUp(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/follow-up/create/`, payload);
   }
+
+  searchFollowUps(params: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/follow-up/search-followup/`, params);
+  }
 }

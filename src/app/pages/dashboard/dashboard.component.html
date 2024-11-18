@@ -1,7 +1,9 @@
 <div class="dashboard-container">
   <h1>Enquiries Dashboard</h1>
 
-  <form [formGroup]="filterForm" class="filters" (ngSubmit)="onSubmit()">
+  <form [formGroup]="filterForm" class="filters">
+    
+  <!-- <form [formGroup]="filterForm" class="filters" (ngSubmit)="onSubmit()"> -->
     <mat-form-field>
       <input matInput placeholder="Search" formControlName="search">
     </mat-form-field>
@@ -26,7 +28,16 @@
     </mat-form-field>
 
     <div class="button-group">
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+      <button 
+        mat-raised-button 
+        color="accent" 
+        type="submit" 
+        (click)="onEnquiryDownload()" 
+        [disabled]="isDownloading">
+        <mat-icon *ngIf="isDownloading">hourglass_empty</mat-icon>
+        {{ isDownloading ? 'Downloading...' : 'Download' }}
+      </button>
       <button mat-raised-button color="warn" type="button" (click)="onReset()">Reset</button>
     </div>
   </form>
