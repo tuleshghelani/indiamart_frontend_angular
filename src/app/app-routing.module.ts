@@ -7,7 +7,10 @@ import { FollowupComponent } from './pages/followup/followup.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
   { path: 'enquiry-details/:id', component: EnquiryDetailsComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'followups', component: FollowupComponent }

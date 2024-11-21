@@ -35,7 +35,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { FollowupComponent } from './pages/followup/followup.component';
-
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: '#ff4081',
   bgsPosition: POSITION.centerCenter,
@@ -57,7 +56,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NavbarComponent,
     FooterComponent,
     SignupComponent,
-    DashboardComponent,
     EnquiryDetailsComponent,
     CreateFollowUpDialogComponent,
     FollowupComponent

@@ -2,7 +2,7 @@
   <h1>Enquiries Dashboard</h1>
 
   <form [formGroup]="filterForm" class="filters">
-    
+
   <!-- <form [formGroup]="filterForm" class="filters" (ngSubmit)="onSubmit()"> -->
     <mat-form-field>
       <input matInput placeholder="Search" formControlName="search">
@@ -29,11 +29,11 @@
 
     <div class="button-group">
       <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
-      <button 
-        mat-raised-button 
-        color="accent" 
-        type="submit" 
-        (click)="onEnquiryDownload()" 
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        (click)="onEnquiryDownload()"
         [disabled]="isDownloading">
         <mat-icon *ngIf="isDownloading">hourglass_empty</mat-icon>
         {{ isDownloading ? 'Downloading...' : 'Download' }}
