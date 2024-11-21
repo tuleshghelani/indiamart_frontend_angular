@@ -43,7 +43,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true }),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   exports: [RouterModule]

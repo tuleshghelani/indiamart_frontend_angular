@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   dataSource = new MatTableDataSource<any>([]);
   totalRecords = 0;
   currentPage = 1;
-  pageSize = 20;
+  pageSize = 10;
   orderBy = '';
   filterForm: FormGroup;
   isDownloading = false;
@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit {
   onReset(): void {
     this.initializeForm();
     this.currentPage = 1;
-    this.pageSize = 20;
+    this.pageSize = 10;
     this.orderBy = '';
     if (this.sort) {
       this.sort.active = '';
