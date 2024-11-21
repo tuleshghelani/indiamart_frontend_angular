@@ -138,3 +138,14 @@ mat-divider {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+
+  mat-form-field {
+    width: 150px;
+  }
+}

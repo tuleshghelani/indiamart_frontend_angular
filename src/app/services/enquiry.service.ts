@@ -47,4 +47,8 @@ export class EnquiryService {
         this.ngxLoader.stop();
       });
   }
+
+  updateEnquiryStatus(payload: { enquiryId: number; enquiryStatus: string }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/enquiry/update-enquiry-status/`, payload);
+  }
 }

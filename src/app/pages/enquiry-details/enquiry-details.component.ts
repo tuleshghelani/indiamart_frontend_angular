@@ -10,6 +10,8 @@ import { FollowUpService } from 'src/app/services/followup.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateFollowUpDialogComponent } from '../create-follow-up-dialog/create-follow-up-dialog.component';
 import { LoaderService } from '../../services/loader.service';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-enquiry-details',
@@ -25,6 +27,7 @@ export class EnquiryDetailsComponent implements OnInit {
   error = false;
   statusOptions = STATUS_OPTIONS;
   getLeadType = getLeadType;
+  selectedStatus: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +56,7 @@ export class EnquiryDetailsComponent implements OnInit {
     this.enquiryService.getEnquiryDetails(id).subscribe({
       next: (response) => {
         this.enquiryDetails = response.DATA;
+        this.selectedStatus = response.DATA.enquiry_status;
         this.loading = false;
       },
       error: (error) => {
@@ -126,5 +130,27 @@ export class EnquiryDetailsComponent implements OnInit {
 
   private refreshEnquiryDetails(enquiryId: number) {
     this.ngOnInit();
+  }
+
+  updateEnquiryStatus(): void {
+    const loaderId = 'enquiry-details-loader';
+    this.loaderService.start(loaderId);
+
+    const payload = {
+      enquiryId: this.enquiryDetails.id,
+      enquiryStatus: this.selectedStatus
+    };
+
+    this.enquiryService.updateEnquiryStatus(payload).subscribe({
+      next: (response) => {
+        this.fetchEnquiryDetails(this.enquiryDetails.id); // Refresh the details
+      },
+      error: (error) => {
+        console.error('Error updating enquiry status', error);
+      },
+      complete: () => {
+        this.loaderService.stop(loaderId);
+      }
+    });
   }
 }

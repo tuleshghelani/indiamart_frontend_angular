@@ -12,7 +12,19 @@
   <mat-card *ngIf="!loading && !error">
     <mat-card-header>
       <mat-card-title>Enquiry Details</mat-card-title>
-      <mat-card-subtitle>Status: {{getLeadType(enquiryDetails.query_type)}}</mat-card-subtitle>
+      <div class="status-container">
+        <mat-form-field>
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="selectedStatus">
+            <mat-option *ngFor="let option of statusOptions" [value]="option.value">
+              {{option.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="updateEnquiryStatus()">
+          Update Status
+        </button>
+      </div>
     </mat-card-header>
     <mat-card-content>
       <div class="details-grid">

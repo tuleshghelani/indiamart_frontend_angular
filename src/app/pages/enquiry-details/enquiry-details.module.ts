@@ -14,6 +14,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
@@ -36,7 +38,9 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    MatSelectModule,
+    FormsModule
   ]
 })
 export class EnquiryDetailsModule { }
