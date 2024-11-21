@@ -1,6 +1,6 @@
 export const STATUS_OPTIONS = [
-  { value: 'S', viewValue: 'Successful' },
+  { value: 'L', viewValue: 'Loss' },
   { value: 'P', viewValue: 'Pending' },
-  { value: 'C', viewValue: 'Closed' },
+  { value: 'W', viewValue: 'Win' },
   // Add more status options as needed
 ];
