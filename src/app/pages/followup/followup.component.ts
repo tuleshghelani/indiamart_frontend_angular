@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { STATUS_OPTIONS } from 'src/app/shared/constants';
+import { FOLLOW_UP_STATUS, STATUS_OPTIONS } from 'src/app/shared/constants';
 import { FollowUpService } from '../../services/followup.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { finalize } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { LoaderService } from 'src/app/services/loader.service';
   styleUrls: ['./followup.component.scss']
 })
 export class FollowupComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'enquiry_id', 'description', 'follow_up_status', 'next_action_date', 'created_at', 'action'];
+  displayedColumns: string[] = ['id', 'sender_name', 'description', 'follow_up_status', 'next_action_date', 'created_at', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   totalRecords = 0;
   currentPage = 1;
@@ -27,7 +27,7 @@ export class FollowupComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  statusOptions = STATUS_OPTIONS;
+  statusOptions = FOLLOW_UP_STATUS;
 
   constructor(
     private followUpService: FollowUpService,
