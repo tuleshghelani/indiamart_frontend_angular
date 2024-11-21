@@ -1,4 +1,8 @@
 <div class="enquiry-details-container">
+  <app-loader
+    loaderId="enquiry-details-loader"
+    text="Loading Enquiry Details..."
+  ></app-loader>
 
   <button mat-raised-button color="accent" (click)="onAction()">Back</button>&nbsp;&nbsp;
   <button mat-raised-button color="primary" (click)="openCreateFollowUpDialog()" class="create-follow-up-btn">
@@ -8,7 +12,7 @@
   <mat-card *ngIf="!loading && !error">
     <mat-card-header>
       <mat-card-title>Enquiry Details</mat-card-title>
-      <mat-card-subtitle>ID: {{enquiryDetails.id}} | Status: {{getLeadType(enquiryDetails.query_type)}}</mat-card-subtitle>
+      <mat-card-subtitle>Status: {{getLeadType(enquiryDetails.query_type)}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <div class="details-grid">
@@ -32,7 +36,7 @@
         </div>
         <div class="detail-item">
           <h3>Query Information</h3>
-          <p><strong>Type:</strong> {{enquiryDetails.query_type}}</p>
+          <p><strong>Type:</strong> {{getLeadType(enquiryDetails.query_type)}}</p>
           <p><strong>Time:</strong> {{enquiryDetails.query_time | date:'medium'}}</p>
           <p><strong>Product:</strong> {{enquiryDetails.query_product_name}}</p>
           <p><strong>Category:</strong> {{enquiryDetails.query_mcat_name}}</p>
@@ -47,7 +51,7 @@
     <br>
   </mat-card>
 
-  <mat-spinner *ngIf="loading"></mat-spinner>
+  <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
 
   <mat-card *ngIf="error">
     <mat-card-content>

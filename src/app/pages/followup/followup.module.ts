@@ -1,50 +1,43 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
+import { FollowupComponent } from './followup.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
-import { globalLoaderConfig } from '../../shared/loader.config';
+import { globalLoaderConfig } from 'src/app/shared/loader.config';
 import { SharedModule } from 'src/app/shared/shared.module';
+
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: FollowupComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    FollowupComponent
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatIconModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
     ReactiveFormsModule,
     SharedModule,
-    RouterModule.forChild(routes),
     NgxUiLoaderModule.forRoot(globalLoaderConfig),
   ]
 })
-export class DashboardModule { }
+export class FollowupModule { }

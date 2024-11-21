@@ -2,7 +2,7 @@ export function getLeadType(queryType: string): string {
   switch (queryType) {
     case 'W':
       return 'Direct Enquiries';
-    case 'BL':
+    case 'B':
       return 'Buy-Leads';
     case 'P':
       return 'PNS Calls';

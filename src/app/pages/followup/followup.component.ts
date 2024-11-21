@@ -6,6 +6,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { STATUS_OPTIONS } from 'src/app/shared/constants';
 import { FollowUpService } from '../../services/followup.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { finalize } from 'rxjs/operators';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-followup',
@@ -29,7 +32,8 @@ export class FollowupComponent implements OnInit {
   constructor(
     private followUpService: FollowUpService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {
     this.filterForm = this.formBuilder.group({
       search: [''],
@@ -44,6 +48,8 @@ export class FollowupComponent implements OnInit {
   }
 
   loadFollowUps(): void {
+    const loaderId = 'followups-loader';
+    this.loaderService.start(loaderId);
     const formValues = this.filterForm.value;
     const params = {
       currentPage: this.currentPage,
@@ -55,15 +61,16 @@ export class FollowupComponent implements OnInit {
       endDate: formValues.endDate ? this.formatDate(new Date(formValues.endDate)) : null
     };
 
-    this.followUpService.searchFollowUps(params).subscribe(
-      (response) => {
-        this.dataSource.data = response.DATA.results;
-        this.totalRecords = response.DATA.pagination.totalRecords;
-      },
-      (error) => {
-        console.error('Error fetching follow-ups', error);
-      }
-    );
+    this.followUpService.searchFollowUps(params).pipe(finalize(() => this.loaderService.stop(loaderId)))
+      .subscribe(
+        (response) => {
+          this.dataSource.data = response.DATA.results;
+          this.totalRecords = response.DATA.pagination.totalRecords;
+        },
+        (error) => {
+          console.error('Error fetching follow-ups', error);
+        }
+      );
   }
 
   onPageChange(event: any): void {

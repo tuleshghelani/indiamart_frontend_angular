@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { FollowUpService } from 'src/app/services/followup.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateFollowUpDialogComponent } from '../create-follow-up-dialog/create-follow-up-dialog.component';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-enquiry-details',
@@ -16,7 +17,10 @@ import { CreateFollowUpDialogComponent } from '../create-follow-up-dialog/create
   styleUrls: ['./enquiry-details.component.scss']
 })
 export class EnquiryDetailsComponent implements OnInit {
-  enquiryDetails: any;
+  enquiryDetails: any = {
+    follow_ups: [],
+    latest_follow_up: null
+  };
   loading = true;
   error = false;
   statusOptions = STATUS_OPTIONS;
@@ -28,7 +32,8 @@ export class EnquiryDetailsComponent implements OnInit {
     private router: Router,
     private followUpService: FollowUpService,
     private dialog: MatDialog,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -43,17 +48,22 @@ export class EnquiryDetailsComponent implements OnInit {
   }
 
   fetchEnquiryDetails(id: number): void {
-    this.enquiryService.getEnquiryDetails(id).subscribe(
-      (response) => {
+    const loaderId = 'enquiry-details-loader';
+    this.loaderService.start(loaderId);
+    this.enquiryService.getEnquiryDetails(id).subscribe({
+      next: (response) => {
         this.enquiryDetails = response.DATA;
         this.loading = false;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching enquiry details', error);
         this.loading = false;
         this.error = true;
+      },
+      complete: () => {
+        this.loaderService.stop(loaderId);
       }
-    );
+    });
   }
 
   getStatusClass(status: string): string {
@@ -98,17 +108,20 @@ export class EnquiryDetailsComponent implements OnInit {
   }
 
   createFollowUp(followUpData: any): void {
-    this.followUpService.createFollowUp(followUpData).subscribe(
-      response => {
+    const loaderId = 'enquiry-details-loader';
+    this.loaderService.start(loaderId);
+    this.followUpService.createFollowUp(followUpData).subscribe({
+      next: (response) => {
         console.log('Follow-up created:', response);
         this.refreshEnquiryDetails(followUpData?.enquiry_id);
-        // Refresh the enquiry details or update the UI as needed
       },
-      error => {
+      error: (error) => {
         console.error('Error creating follow-up:', error);
-        // Handle error (e.g., show error message to user)
+      },
+      complete: () => {
+        this.loaderService.stop(loaderId);
       }
-    );
+    });
   }
 
   private refreshEnquiryDetails(enquiryId: number) {

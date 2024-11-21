@@ -35,19 +35,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { FollowupComponent } from './pages/followup/followup.component';
-const ngxUiLoaderConfig: NgxUiLoaderConfig = {
-  bgsColor: '#ff4081',
-  bgsPosition: POSITION.centerCenter,
-  bgsSize: 40,
-  bgsType: SPINNER.ballSpinClockwise,
-  fgsType: SPINNER.squareJellyBox,
-  pbDirection: PB_DIRECTION.leftToRight,
-  pbThickness: 3,
-  blur: 10,
-  overlayColor: 'rgba(40,40,40,0.8)',
-  hasProgressBar: true,
-  fgsPosition: POSITION.centerCenter
-};
+import { ngxUiLoaderConfig } from './shared/ngx-ui-loader.config';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -55,10 +44,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     LoginComponent,
     NavbarComponent,
     FooterComponent,
-    SignupComponent,
-    EnquiryDetailsComponent,
-    CreateFollowUpDialogComponent,
-    FollowupComponent
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +74,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatCardModule,
     MatExpansionModule,
     MatNativeDateModule,
-    MatDialogModule
+    MatDialogModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

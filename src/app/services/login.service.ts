@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { tap } from 'rxjs/operators';
 export class LoginService {
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/user/login/`, { username, password }).pipe(
@@ -28,5 +29,10 @@ export class LoginService {
 
   logout(): void {
     localStorage.removeItem('ACCESS_TOKEN');
+    this.router.navigate(['/login']);
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('ACCESS_TOKEN');
   }
 }

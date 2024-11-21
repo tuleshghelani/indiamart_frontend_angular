@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { STATUS_OPTIONS } from 'src/app/shared/constants';
 import { getLeadType } from 'src/app/shared/utils';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,7 @@ import { getLeadType } from 'src/app/shared/utils';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'sender_name', 'query_type', 'lead_type', 'sender_company', 'sender_state', 'sender_mobile', 'query_time', 'enquiry_status', 'action'];
+  displayedColumns: string[] = ['id', 'sender_name', 'lead_type', 'sender_company', 'sender_state', 'sender_mobile', 'query_time', 'enquiry_status', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   totalRecords = 0;
   currentPage = 1;
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private enquiryService: EnquiryService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {
     this.filterForm = this.formBuilder.group({
       search: [''],
@@ -46,6 +48,8 @@ export class DashboardComponent implements OnInit {
   }
 
   loadEnquiries(): void {
+    const loaderId = 'enquiries-loader';
+    this.loaderService.start(loaderId);
     const formValues = this.filterForm.value;
     const params = {
       currentPage: this.currentPage,
@@ -57,15 +61,18 @@ export class DashboardComponent implements OnInit {
       endDate: formValues.endDate ? this.formatDate(new Date(formValues.endDate)) : null
     };
 
-    this.enquiryService.searchEnquiries(params).subscribe(
-      (response) => {
+    this.enquiryService.searchEnquiries(params).subscribe({
+      next: (response) => {
         this.dataSource.data = response.DATA.results;
         this.totalRecords = response.DATA.pagination.totalRecords;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching enquiries', error);
+      },
+      complete: () => {
+        this.loaderService.stop(loaderId);
       }
-    );
+    });
   }
 
   onPageChange(event: any): void {

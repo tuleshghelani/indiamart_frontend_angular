@@ -4,6 +4,18 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EnquiryDetailsComponent } from './pages/enquiry-details/enquiry-details.component';
 import { FollowupComponent } from './pages/followup/followup.component';
+import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER } from 'ngx-ui-loader';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { inject } from '@angular/core';
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  fgsType: SPINNER.threeBounce,
+  fgsSize: 100,
+  fgsColor: '#007bff',
+  blur: 5,
+  overlayColor: 'rgba(40,40,40,0.1)',
+  hasProgressBar: false
+};
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -11,13 +23,29 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
-  { path: 'enquiry-details/:id', component: EnquiryDetailsComponent },
+  {
+    path: 'enquiry-details/:id',
+    loadChildren: () => import('./pages/enquiry-details/enquiry-details.module')
+      .then(m => m.EnquiryDetailsModule)
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'followups', component: FollowupComponent }
+  {
+    path: 'followups',
+    loadChildren: () => import('./pages/followup/followup.module')
+      .then(m => m.FollowupModule)
+  },
+  {
+    path: 'create-follow-up',
+    loadChildren: () => import('./pages/create-follow-up-dialog/create-follow-up-dialog.module')
+      .then(m => m.CreateFollowUpDialogModule)
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

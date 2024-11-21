@@ -2,21 +2,30 @@
   <mat-toolbar color="primary">
       <span>JK Industries</span>
       <span class="spacer"></span>
-      
-      <button mat-button routerLink="/dashboard" routerLinkActive="active">
-        <mat-icon>list_alt</mat-icon>
-        <span class="button-text">Enquiries</span>
-      </button>
 
-      <button mat-button routerLink="/followups" routerLinkActive="active">
-        <mat-icon>follow_the_signs</mat-icon>
-        <span class="button-text">Follow-ups</span>
-      </button>
+      <ng-container *ngIf="isLoggedIn()">
+        <button mat-button routerLink="/dashboard" routerLinkActive="active">
+          <mat-icon>list_alt</mat-icon>
+          <span class="button-text">Enquiries</span>
+        </button>
 
-      <button mat-button routerLink="/login" class="login-button">
-        <mat-icon>login</mat-icon>
-        <span class="button-text">Login</span>
-      </button>
+        <button mat-button routerLink="/followups" routerLinkActive="active">
+          <mat-icon>follow_the_signs</mat-icon>
+          <span class="button-text">Follow-ups</span>
+        </button>
+
+        <button mat-button (click)="logout()" class="logout-button">
+          <mat-icon>logout</mat-icon>
+          <span class="button-text">Logout</span>
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="!isLoggedIn()">
+        <button mat-button routerLink="/login" class="login-button">
+          <mat-icon>login</mat-icon>
+          <span class="button-text">Login</span>
+        </button>
+      </ng-container>
   </mat-toolbar>
 
   <mat-card>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     constructor(
       private snackBar: MatSnackBar,
       private router: Router,
-      private loginService: LoginService
+      private loginService: LoginService,
+      private loaderService: LoaderService
     ) { }
 
     ngOnInit(): void {
@@ -29,6 +31,8 @@ export class LoginComponent implements OnInit {
 
     // Login form Submit method
     loginFormSubmit() {
+      const loaderId = 'login-loader';
+      this.loaderService.start(loaderId);
       this.loginService.login(this.loginData.username, this.loginData.password).subscribe(
         (response) => {
           console.log('Login successful', response);
@@ -38,6 +42,8 @@ export class LoginComponent implements OnInit {
         (error) => {
           console.error('Login failed', error);
           this.snackBar.open(error.error.MESSAGE, 'Close', { duration: 3000 });
+        },() => {
+          this.loaderService.stop(loaderId);
         }
       );
     }
