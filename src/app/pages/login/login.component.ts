@@ -36,10 +36,12 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.loginData.username, this.loginData.password).subscribe(
         (response) => {
           // console.log('Login successful', response);
+          this.loaderService.stop(loaderId);
           this.snackBar.open('Login successful', 'Close', { duration: 3000 });
           this.router.navigate(['/dashboard']);
         },
         (error) => {
+          this.loaderService.stop(loaderId);
           console.error('Login failed', error);
           this.snackBar.open(error.error.MESSAGE, 'Close', { duration: 3000 });
         },() => {

@@ -58,11 +58,13 @@ export class EnquiryDetailsComponent implements OnInit {
         this.enquiryDetails = response.DATA;
         this.selectedStatus = response.DATA.enquiry_status;
         this.loading = false;
+        this.loaderService.stop(loaderId);
       },
       error: (error) => {
         console.error('Error fetching enquiry details', error);
         this.loading = false;
         this.error = true;
+        this.loaderService.stop(loaderId);
       },
       complete: () => {
         this.loaderService.stop(loaderId);

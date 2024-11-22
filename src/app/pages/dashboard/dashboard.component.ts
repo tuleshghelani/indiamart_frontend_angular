@@ -15,7 +15,7 @@ import { LoaderService } from '../../services/loader.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'sender_name', 'lead_type', 'sender_company', 'sender_state', 'sender_mobile', 'query_time', 'enquiry_status', 'action'];
+  displayedColumns: string[] = ['id', 'sender_name', 'lead_type', 'sender_company', 'sender_state', 'sender_mobile', 'subject', 'query_time', 'enquiry_status', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   totalRecords = 0;
   currentPage = 1;
@@ -65,8 +65,10 @@ export class DashboardComponent implements OnInit {
       next: (response) => {
         this.dataSource.data = response.DATA.results;
         this.totalRecords = response.DATA.pagination.totalRecords;
+        this.loaderService.stop(loaderId);
       },
       error: (error) => {
+        this.loaderService.stop(loaderId);
         console.error('Error fetching enquiries', error);
       },
       complete: () => {
