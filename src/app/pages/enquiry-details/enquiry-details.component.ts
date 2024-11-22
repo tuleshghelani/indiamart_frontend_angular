@@ -120,9 +120,11 @@ export class EnquiryDetailsComponent implements OnInit {
       next: (response) => {
         console.log('Follow-up created:', response);
         this.refreshEnquiryDetails(followUpData?.enquiry_id);
+        this.loaderService.stop(loaderId);
       },
       error: (error) => {
         console.error('Error creating follow-up:', error);
+        this.loaderService.stop(loaderId);
       },
       complete: () => {
         this.loaderService.stop(loaderId);
