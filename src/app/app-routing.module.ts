@@ -7,6 +7,7 @@ import { FollowupComponent } from './pages/followup/followup.component';
 import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER } from 'ngx-ui-loader';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { inject } from '@angular/core';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.threeBounce,
@@ -38,7 +39,9 @@ const routes: Routes = [
     path: 'create-follow-up',
     loadChildren: () => import('./pages/create-follow-up-dialog/create-follow-up-dialog.module')
       .then(m => m.CreateFollowUpDialogModule)
-  }
+  },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
