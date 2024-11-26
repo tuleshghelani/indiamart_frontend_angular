@@ -32,6 +32,17 @@
       <input matInput type="date" formControlName="endDate">
     </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Lead Type</mat-label>
+      <mat-select formControlName="queryTypes" multiple>
+        <mat-option value="W">Direct Enquiries</mat-option>
+        <mat-option value="B">Buy-Leads</mat-option>
+        <mat-option value="P">PNS Calls</mat-option>
+        <mat-option [value]="['V','BIZ']">Catalog-view Leads</mat-option>
+        <mat-option value="WA">WhatsApp Enquiries</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <div class="button-group">
       <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
       <button
@@ -76,7 +87,12 @@
 
       <ng-container matColumnDef="sender_mobile">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
-        <td mat-cell *matCellDef="let element"> {{element.sender_mobile}} </td>
+        <td mat-cell *matCellDef="let element">
+          {{element.sender_mobile}}
+          <button mat-icon-button color="primary" (click)="openWhatsApp(element.sender_mobile)">
+            <img src="assets/shared/WhatsApp.png" alt="WhatsApp" class="whatsapp-logo" />
+          </button>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="subject">

@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ngxUiLoaderConfig } from '../../shared/ngx-ui-loader.config';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { EnquiryDetailsComponent } from './enquiry-details.component';
 import { CreateFollowUpDialogModule } from '../create-follow-up-dialog/create-follow-up-dialog.module';
@@ -40,7 +41,8 @@ const routes: Routes = [
     MatButtonModule,
     SharedModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ]
 })
 export class EnquiryDetailsModule { }

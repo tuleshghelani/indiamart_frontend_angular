@@ -95,3 +95,26 @@
     }
   }
 }
+
+.whatsapp-icon {
+  color: #25D366;
+  cursor: pointer;
+  margin-left: 8px;
+  font-family: 'Material Icons';
+  vertical-align: middle;
+  font-size: 20px;
+
+  &:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+}
+
+.mat-column-sender_mobile {
+  white-space: nowrap;
+
+  .mat-icon {
+    font-family: 'Material Icons' !important;
+  }
+}

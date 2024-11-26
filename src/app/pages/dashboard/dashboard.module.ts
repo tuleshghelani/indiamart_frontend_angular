@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { globalLoaderConfig } from '../../shared/loader.config';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 const routes: Routes = [
   {
     path: '',
@@ -43,6 +44,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     SharedModule,
+    MatTooltipModule,
     RouterModule.forChild(routes),
     NgxUiLoaderModule.forRoot(globalLoaderConfig),
   ]
