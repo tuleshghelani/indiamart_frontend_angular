@@ -6,6 +6,11 @@
 
   <h1>Enquiries Dashboard</h1>
 
+  <button mat-raised-button color="primary" class="create-enquiry-btn" routerLink="/new-enquiry">
+    <mat-icon>add</mat-icon>
+    Create New Enquiry
+  </button>
+
   <form [formGroup]="filterForm" class="filters">
 
   <!-- <form [formGroup]="filterForm" class="filters" (ngSubmit)="onSubmit()"> -->
@@ -40,6 +45,7 @@
         <mat-option value="P">PNS Calls</mat-option>
         <mat-option [value]="['V','BIZ']">Catalog-view Leads</mat-option>
         <mat-option value="WA">WhatsApp Enquiries</mat-option>
+        <mat-option value="M">Manual Enquiries</mat-option>
       </mat-select>
     </mat-form-field>
 

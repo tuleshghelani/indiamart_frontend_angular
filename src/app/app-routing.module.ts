@@ -9,6 +9,8 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { inject } from '@angular/core';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { AuthGuard } from './guards/auth.guard';
+import { SignupComponent } from './pages/signup/signup.component';
+import { NewEnquiryComponent } from './pages/new-enquiry/new-enquiry.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.threeBounce,
@@ -46,6 +48,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'new-enquiry', component: NewEnquiryComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 

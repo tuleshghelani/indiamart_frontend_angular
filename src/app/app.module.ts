@@ -37,6 +37,7 @@ import { DatePipe } from '@angular/common';
 import { FollowupComponent } from './pages/followup/followup.component';
 import { ngxUiLoaderConfig } from './shared/ngx-ui-loader.config';
 import { SharedModule } from './shared/shared.module';
+import { NewEnquiryComponent } from './pages/new-enquiry/new-enquiry.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SharedModule } from './shared/shared.module';
     LoginComponent,
     NavbarComponent,
     FooterComponent,
-    SignupComponent
+    SignupComponent,
+    NewEnquiryComponent
   ],
   imports: [
     BrowserModule,

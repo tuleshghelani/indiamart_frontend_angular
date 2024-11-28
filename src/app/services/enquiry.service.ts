@@ -51,4 +51,8 @@ export class EnquiryService {
   updateEnquiryStatus(payload: { enquiryId: number; enquiryStatus: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/enquiry/update-enquiry-status/`, payload);
   }
+
+  createManualEnquiry(enquiryData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/enquiry/manual-new-enquiry/`, enquiryData);
+  }
 }

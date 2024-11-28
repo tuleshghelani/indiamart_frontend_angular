@@ -11,6 +11,8 @@ export function getLeadType(queryType: string): string {
       return 'Catalog-view Leads';
     case 'WA':
       return 'WhatsApp Enquiries';
+    case 'M':
+      return 'Manual Enquiries';
     default:
       return 'Unknown';
   }
