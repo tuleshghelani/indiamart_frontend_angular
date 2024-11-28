@@ -8,6 +8,7 @@ import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER } from 'ngx-ui-loader';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { inject } from '@angular/core';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.threeBounce,
@@ -22,23 +23,27 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'enquiry-details/:id',
     loadChildren: () => import('./pages/enquiry-details/enquiry-details.module')
-      .then(m => m.EnquiryDetailsModule)
+      .then(m => m.EnquiryDetailsModule),
+    canActivate: [AuthGuard]
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'followups',
     loadChildren: () => import('./pages/followup/followup.module')
-      .then(m => m.FollowupModule)
+      .then(m => m.FollowupModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'create-follow-up',
     loadChildren: () => import('./pages/create-follow-up-dialog/create-follow-up-dialog.module')
-      .then(m => m.CreateFollowUpDialogModule)
+      .then(m => m.CreateFollowUpDialogModule),
+    canActivate: [AuthGuard]
   },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
