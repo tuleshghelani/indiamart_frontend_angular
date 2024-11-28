@@ -45,8 +45,7 @@ import { NewEnquiryComponent } from './pages/new-enquiry/new-enquiry.component';
     LoginComponent,
     NavbarComponent,
     FooterComponent,
-    SignupComponent,
-    NewEnquiryComponent
+    SignupComponent
   ],
   imports: [
     BrowserModule,

@@ -48,7 +48,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
-  { path: 'new-enquiry', component: NewEnquiryComponent },
+  {
+    path: 'new-enquiry',
+    loadChildren: () => import('./pages/new-enquiry/new-enquiry.module').then(m => m.NewEnquiryModule),
+    canActivate: [AuthGuard]
+  },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
