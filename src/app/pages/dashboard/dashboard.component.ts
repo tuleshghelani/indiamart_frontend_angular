@@ -16,7 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'sender_name', 'lead_type', 'sender_company', 'sender_state', 'sender_mobile', 'subject', 'query_time', 'enquiry_status', 'action'];
+  displayedColumns: string[] = ['id', 'sender_name', 'lead_type', 'sender_company', 'sender_city',
+     'sender_state', 'sender_mobile', 'subject', 'query_time', 'enquiry_status', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   totalRecords = 0;
   currentPage = 1;
