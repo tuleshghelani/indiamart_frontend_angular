@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   orderBy = '';
   filterForm: FormGroup;
   isDownloading = false;
+  goToPageNumber: number = 1;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -234,6 +235,24 @@ export class DashboardComponent implements OnInit {
       setTimeout(() => {
         window.open(webUrl, '_blank');
       }, 1000);
+    }
+  }
+
+  get maxPage(): number {
+    return Math.ceil(this.totalRecords / this.pageSize);
+  }
+
+  goToPage(): void {
+    if (this.goToPageNumber) {
+      // Ensure the page number is within valid range
+      const pageNumber = Math.max(1, Math.min(this.goToPageNumber, this.maxPage));
+
+      // Update paginator
+      if (this.paginator) {
+        this.paginator.pageIndex = pageNumber - 1;
+        this.currentPage = pageNumber;
+        this.loadEnquiries();
+      }
     }
   }
 }

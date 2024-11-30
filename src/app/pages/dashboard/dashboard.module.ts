@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { globalLoaderConfig } from '../../shared/loader.config';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -43,6 +43,7 @@ const routes: Routes = [
     MatButtonModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
+    FormsModule,
     SharedModule,
     MatTooltipModule,
     RouterModule.forChild(routes),
