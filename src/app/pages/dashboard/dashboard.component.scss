@@ -126,3 +126,26 @@
     margin-right: 8px;
   }
 }
+
+.status-cell {
+  .status-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-text {
+    flex: 1;
+  }
+
+  .unread-indicator {
+    color: #f44336; // Red color for unread indicator
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+
+    &:hover {
+      color: #d32f2f;
+    }
+  }
+}
