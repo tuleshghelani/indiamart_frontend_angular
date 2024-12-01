@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -29,10 +29,24 @@ export class LoginService {
 
   logout(): void {
     localStorage.removeItem('ACCESS_TOKEN');
-    this.router.navigate(['/login']);
+    this.http.post(`${this.baseUrl}/api/user/logout/`, {}).pipe(
+      finalize(() => {
+        this.navigateToLoginWithRefresh();
+      })
+    ).subscribe({
+      error: (error) => {
+        console.error('Logout API error:', error);
+      }
+    });
   }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('ACCESS_TOKEN');
+  }
+
+  navigateToLoginWithRefresh(): void {
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 }
